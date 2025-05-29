@@ -13,13 +13,14 @@ exports.AuthRepository = void 0;
 const common_1 = require("@nestjs/common");
 const prismaClient_1 = __importDefault(require("../../prisma/prismaClient"));
 let AuthRepository = class AuthRepository {
-    async createUser(data) {
+    async createUser(data, isVerified) {
         try {
             const user = await prismaClient_1.default.user.create({
                 data: {
                     email: data.email,
                     password: data.password,
                     name: data.name,
+                    isVerified: isVerified,
                 }
             });
             return user;
@@ -30,6 +31,24 @@ let AuthRepository = class AuthRepository {
             }
             else {
                 throw new Error("An unexpected error occurred while creating the user.");
+            }
+        }
+    }
+    async findUserByEmail(email) {
+        try {
+            const user = await prismaClient_1.default.user.findUnique({
+                where: {
+                    email: email,
+                },
+            });
+            return user;
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to find user by email: ${error.message}`);
+            }
+            else {
+                throw new Error("An unexpected error occurred while finding the user.");
             }
         }
     }
