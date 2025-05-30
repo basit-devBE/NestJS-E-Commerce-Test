@@ -1,12 +1,17 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import dotenv from "dotenv";
-dotenv.config();
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
-  });
+  
+  // Add this middleware to get raw body
+  app.use(bodyParser.json({
+    verify: (req: any, res, buf) => {
+      req.rawBody = buf;
+    }
+  }));
+  
+  await app.listen(4000);
 }
-bootstrap().catch((err) => console.error("Failed to start server", err));
+bootstrap();

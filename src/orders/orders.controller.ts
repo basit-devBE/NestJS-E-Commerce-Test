@@ -66,6 +66,29 @@ export class OrdersController {
                 }
             }
         }
+
+        @Post('get-orders')
+        async getOrders(@Req() req: Request, @Res() res: Response) {
+            try {
+                const userId = String(req.userId);
+                console.log("User ID from request:", userId);
+                const user = await this.authRepository.findUserById(userId);
+                if(!user){
+                    return res.status(404).json({ message: "User not found" });
+                }
+                if(!user.isVerified){
+                    return res.status(403).json({ message: "User is not verified" });
+                }
+                const orders = await this.orderService.getOrderByUserId(userId);
+                res.status(200).json(orders);
+            } catch (error) {
+                if (error instanceof Error) {
+                    res.status(400).json({ message: `Failed to get orders: ${error.message}` });
+                } else {
+                    res.status(500).json({ message: "An unexpected error occurred while getting orders." });
+                }
+            }
+        }
     }
     
 

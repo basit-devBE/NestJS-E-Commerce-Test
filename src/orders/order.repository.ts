@@ -86,4 +86,48 @@ export class OrderRepository{
           }
         }
       }
+
+      async updateOrderStatus(orderId: string, status:string){
+        try {
+            const order = await prisma.order.update({
+                where: {
+                    id: orderId,
+                },
+                data: {
+                    status: status,
+                },
+            });
+            return order;
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to update order status: ${error.message}`);
+            } else {
+                throw new Error("An unexpected error occurred while updating the order status.");
+            }
+        }
+      }
+
+      async findOrdersByUserId(userId: string) {
+        try {
+            const orders = await prisma.order.findMany({
+                where: {
+                    userId: userId,
+                },
+                include: {
+                    orderItems: {
+                        include: {
+                            product: true
+                        }
+                    }
+                }
+            });
+            return orders;
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to find orders by user ID: ${error.message}`);
+            } else {
+                throw new Error("An unexpected error occurred while finding the orders.");
+            }
+        }
+      }
 }

@@ -72,4 +72,23 @@ export class EmailService {
             return false;
         }
     }
+
+    static async sendConfirmationemail(name: string, orderId: string, email:string): Promise<boolean> {
+        try {
+            await transporter.sendMail({
+                from: process.env.EMAIL_USER,
+                to: email,
+                subject: 'Order Confirmation',
+                template: 'orderconfirmation',
+                context: {
+                    name,
+                    orderId
+                }
+            });
+            return true;
+        } catch (error) {
+            console.error('Error sending confirmation email:', error);
+            return false;
+        }
+    }
 }
