@@ -11,7 +11,6 @@ import { generateAccessToken, generateRefreshToken } from 'src/utils/jwt';
 export class AuthService {
     private redisService:RedisService
     private authRepository: AuthRepository
-    private emailService:EmailService
 
     constructor(){
         this.redisService= new RedisService()

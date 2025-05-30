@@ -1,5 +1,10 @@
+# Dependencies
 node_modules
+# Environment variables
 .env
+# Prisma generated files
 /generated/prisma
-# Ignore build output
-dist
+# Build output
+dist/
+# Self-reference (not typically needed)
+# .gitignore

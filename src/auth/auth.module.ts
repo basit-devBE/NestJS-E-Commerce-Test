@@ -1,12 +1,14 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AuthRepository } from './auth.repository'; // Add this import
 import { validateRequest } from 'src/utils/validate';
 import { loginUserDto, registerUserDto, verifyUserDto } from './auth.schema';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AuthRepository], // Add AuthRepository to providers
+  exports: [AuthRepository], // Add this exports array
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {

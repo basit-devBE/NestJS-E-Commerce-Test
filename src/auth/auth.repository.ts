@@ -41,4 +41,21 @@ export class AuthRepository{
             }
         }
     }
+
+    async findUserById(id: string) {
+        try {
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: id,
+                },
+            });
+            return user;
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to find user by ID: ${error.message}`);
+            } else {
+                throw new Error("An unexpected error occurred while finding the user.");
+            }
+        }
+    }
 }
