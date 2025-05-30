@@ -1,98 +1,193 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS E-Commerce API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive e-commerce backend API built with NestJS, featuring user authentication, order management, payment processing with Stripe, and email notifications.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **User Authentication & Authorization**
+  - User registration with email verification
+  - JWT-based authentication with access & refresh tokens
+  - Password hashing with bcrypt
+  - Redis-based verification code storage
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Order Management**
+  - Create orders with multiple products
+  - Stripe payment integration
+  - Real-time inventory management
+  - Order status tracking
 
-## Project setup
+- **Email Notifications**
+  - Verification emails with custom templates
+  - Welcome emails after registration
+  - Order confirmation emails
 
-```bash
-$ npm install
-```
+- **Database Management**
+  - PostgreSQL with Prisma ORM
+  - Database migrations and seeding
+  - Relational data modeling
 
-## Compile and run the project
+## 🛠️ Tech Stack
 
-```bash
-# development
-$ npm run start
+- **Framework**: NestJS (Node.js)
+- **Database**: PostgreSQL with Prisma ORM
+- **Cache**: Redis
+- **Payment**: Stripe
+- **Authentication**: JWT (JSON Web Tokens)
+- **Email**: Nodemailer with Handlebars templates
+- **Validation**: Zod schemas
+- **Password Hashing**: bcrypt
 
-# watch mode
-$ npm run start:dev
+## 📋 Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+Before running this project, make sure you have the following installed:
 
-## Run tests
+- Node.js (v20.0.0 or higher)
+- npm (v10.0.0 or higher)
+- PostgreSQL (v12 or higher)
+- Redis server
+- Git
 
-```bash
-# unit tests
-$ npm run test
+## 🔧 Installation
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clone the Repository
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone <repository-url>
+cd NestJS-E-Commerce-Test
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Install Dependencies
 
-## Resources
+```bash
+npm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 3. Environment Configuration
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Create a `.env` file in the root directory with the following variables:
 
-## Support
+```env
+# Server Configuration
+PORT=4000
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Database Configuration
+DATABASE_URL="postgresql://username:password@localhost:5432/database_name?schema=public"
 
-## Stay in touch
+# Redis Configuration
+REDIS_URL="redis://localhost:6379"
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# JWT Configuration
+JWT_SECRET="your-jwt-secret-key"
+JWT_REFRESH_SECRET="your-jwt-refresh-secret-key"
 
-## License
+# Email Configuration (Gmail)
+EMAIL_USER="your-email@gmail.com"
+EMAIL_PASS="your-app-password"
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Stripe Configuration
+STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+STRIPE_WEBHOOK_SECRET="whsec_your_webhook_secret"
+
+# Environment
+NODE_ENV="development"
+```
+
+### 4. Database Setup
+
+#### Start PostgreSQL and create a database:
+
+```bash
+# Create a new database (replace with your preferred name)
+createdb ecommerce_db
+
+# Update DATABASE_URL in .env with your database credentials
+```
+
+#### Run Prisma migrations:
+
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations
+npx prisma migrate dev
+
+# Seed the database with sample products
+npm run seed-products
+```
+
+### 5. Redis Setup
+
+#### Install and start Redis:
+
+**On Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install redis-server
+sudo systemctl start redis-server
+sudo systemctl enable redis-server
+```
+
+**On macOS:**
+```bash
+brew install redis
+brew services start redis
+```
+
+**On Windows:**
+- Download and install Redis from the official website
+- Or use Docker: `docker run -d -p 6379:6379 redis:alpine`
+
+### 6. Email Configuration
+
+For Gmail, you need to:
+1. Enable 2-factor authentication on your Google account
+2. Generate an App Password
+3. Use the App Password in `EMAIL_PASS` environment variable
+
+### 7. Stripe Configuration
+
+1. Create a Stripe account at [stripe.com](https://stripe.com)
+2. Get your test API keys from the Stripe dashboard
+3. Set up webhook endpoints for payment processing
+4. Add webhook secret to environment variables
+
+## 🚀 Running the Application
+
+### Development Mode
+
+```bash
+# Start the application in development mode with hot reload
+npm run start:dev
+```
+
+### Production Mode
+
+```bash
+# Build the application
+npm run build
+
+# Start the production server
+npm run start:prod
+```
+
+### Debug Mode
+
+```bash
+# Start with debugging enabled
+npm run start:debug
+```
+
+The server will start on `http://localhost:4000` (or the port specified in your `.env` file).
+
+## 📚 API Documentation
+
+For detailed API documentation including all routes, request/response examples, and authentication flows, please refer to:
+
+**[docs/flow.md](docs/flow.md)**
+
+This documentation covers:
+- User authentication flow (register, verify, login, logout)
+- Order management (create, checkout, get orders)
+- Payment processing with Stripe
+- Error handling and security features
